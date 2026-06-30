@@ -1,3 +1,4 @@
+import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -37,8 +38,23 @@ def create_app() -> FastAPI:
     def predict(payload: PredictRequest) -> PredictResponse:
         model = load_model_artifact("logistic_regression")
         row = build_feature_row(payload)
-        prediction = int(model.predict([row])[0])
-        probabilities = model.predict_proba([row])[0]
+        feature_frame = pd.DataFrame([row], columns=[
+            "age",
+            "sex",
+            "cp",
+            "trestbps",
+            "chol",
+            "fbs",
+            "restecg",
+            "thalach",
+            "exang",
+            "oldpeak",
+            "slope",
+            "ca",
+            "thal",
+        ])
+        prediction = int(model.predict(feature_frame)[0])
+        probabilities = model.predict_proba(feature_frame)[0]
         confidence = float(max(probabilities))
         return PredictResponse(prediction=prediction, confidence=confidence)
 
