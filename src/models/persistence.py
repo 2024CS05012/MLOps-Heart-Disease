@@ -20,6 +20,12 @@ def save_model_artifacts(models: Dict[str, Any]) -> None:
 
 def load_model_artifact(name: str) -> Any:
     model_path = MODEL_DIR / f"{name}.joblib"
-    if not model_path.exists():
+    if model_path.exists():
+        return joblib.load(model_path)
+
+    from src.models.train import train_baseline_models
+
+    metrics = train_baseline_models()
+    if name not in metrics or metrics[name].get("model") is None:
         raise FileNotFoundError(f"Model artifact not found: {model_path}")
-    return joblib.load(model_path)
+    return metrics[name]["model"]

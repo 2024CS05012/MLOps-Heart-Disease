@@ -28,7 +28,9 @@ def log_model_run(metrics: Dict[str, Any], model_name: str, model: Any) -> None:
         mlflow.log_metric("f1", metrics.get("f1", 0.0))
         mlflow.log_metric("roc_auc", metrics.get("roc_auc", 0.0))
 
-        try:
-            mlflow.sklearn.log_model(model, artifact_path="model")
-        except Exception:
-            mlflow.log_artifact(str(Path("models") / f"{model_name}.joblib"))
+        artifact_path = Path("models") / f"{model_name}.joblib"
+        if artifact_path.exists():
+            try:
+                mlflow.log_artifact(str(artifact_path))
+            except Exception:
+                pass
