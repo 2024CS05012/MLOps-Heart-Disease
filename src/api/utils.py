@@ -15,5 +15,5 @@ def build_feature_row(payload: Any) -> List[float]:
         payload.oldpeak,
         payload.slope,
         payload.ca,
-        payload.th,
+        payload.thal,
     ]
