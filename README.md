@@ -17,11 +17,17 @@ This repository implements an end-to-end MLOps workflow for the UCI Heart Diseas
 
 ## Quick start
 
-1. Create and activate a Python virtual environment.
+1. Create and activate a Python virtual environment:
+   - `python3 -m venv .venv`
+   - `source .venv/bin/activate`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run tests: `pytest`
 4. Start the API: `uvicorn src.api.main:app --reload`
 5. Launch MLflow UI: `mlflow ui --backend-store-uri file:./mlruns`
+
+### Fresh clone note
+
+The repository includes trained model artifacts in the models/ folder, so the API can run immediately after installing dependencies without retraining.
 
 ## Current implementation highlights
 
