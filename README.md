@@ -1,6 +1,6 @@
 # Heart Disease MLOps Assignment
 
-This project builds an end-to-end MLOps pipeline for the UCI Heart Disease dataset and is designed to satisfy the assignment requirements for EDA, model training, MLflow tracking, FastAPI deployment, Dockerization, CI/CD, and reporting.
+This repository implements an end-to-end MLOps workflow for the UCI Heart Disease dataset. It covers data loading, preprocessing, model training, experiment tracking with MLflow, API serving with FastAPI, containerization, CI/CD, and reporting assets for the assignment.
 
 ## Project structure
 
@@ -13,10 +13,11 @@ This project builds an end-to-end MLOps pipeline for the UCI Heart Disease datas
 - tests/ for unit tests
 - docker/ and k8s/ for deployment assets
 - .github/workflows/ for CI
+- docs/ for the report outline and setup notes
 
 ## Quick start
 
-1. Create a Python environment.
+1. Create and activate a Python virtual environment.
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run tests: `pytest`
 4. Start the API: `uvicorn src.api.main:app --reload`
@@ -24,9 +25,15 @@ This project builds an end-to-end MLOps pipeline for the UCI Heart Disease datas
 
 ## Current implementation highlights
 
-- Dataset download helper in data/raw/download_dataset.py
+- A reusable data loader and preprocessing module
 - Baseline training for Logistic Regression and Random Forest
 - MLflow experiment tracking for each trained model
-- FastAPI prediction endpoint
+- A FastAPI prediction endpoint with a health check
 - Docker and Kubernetes starter files
-- Automated tests via pytest
+- Automated tests via pytest and GitHub Actions CI
+
+## Assignment submission notes
+
+- The repository is published at https://github.com/2024CS05012/MLOps-Heart-Disease
+- The project is designed to be reproducible and easy to run locally
+- The final report outline and setup guidance are available in the docs/ folder
