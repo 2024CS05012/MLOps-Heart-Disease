@@ -12,5 +12,6 @@ setup(
         "uvicorn",
         "joblib",
         "mlflow",
+        "prometheus-fastapi-instrumentator",
     ],
 )

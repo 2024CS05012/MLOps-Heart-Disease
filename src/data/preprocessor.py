@@ -10,13 +10,8 @@ from src.data.loader import load_heart_disease_data
 
 def prepare_training_data(test_size: float = 0.2, random_state: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     df = load_heart_disease_data()
-    target_col = "target" if "target" in df.columns else "num"
-
-    if df[target_col].dtype == object:
-        df[target_col] = df[target_col].astype(int)
-
-    X = df.drop(columns=[target_col])
-    y = df[target_col]
+    X = df.drop(columns=["target"])
+    y = df["target"].astype(int)
 
     try:
         X_train, X_test, y_train, y_test = train_test_split(

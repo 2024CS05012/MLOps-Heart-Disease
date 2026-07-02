@@ -1,6 +1,6 @@
 # Heart Disease MLOps Assignment
 
-This repository implements an end-to-end MLOps workflow for the UCI Heart Disease dataset. It covers data loading, preprocessing, model training, experiment tracking with MLflow, API serving with FastAPI, containerization, CI/CD, and reporting assets for the assignment.
+This repository implements an end-to-end MLOps workflow for the UCI Heart Disease dataset. It covers data acquisition, EDA, preprocessing, model training and tuning, experiment tracking with MLflow, API serving with FastAPI, containerization, CI/CD, Kubernetes deployment manifests, and Prometheus-ready monitoring.
 
 ## Project structure
 
@@ -21,25 +21,32 @@ This repository implements an end-to-end MLOps workflow for the UCI Heart Diseas
    - `python3 -m venv .venv`
    - `source .venv/bin/activate`
 2. Install dependencies: `pip install -r requirements.txt`
-3. Run tests: `pytest`
-4. Start the API: `uvicorn src.api.main:app --reload`
-5. Launch MLflow UI: `mlflow ui --backend-store-uri file:./mlruns`
+3. Download the dataset: `python data/raw/download_dataset.py`
+4. Generate EDA figures: `python -m src.data.generate_eda_artifacts`
+5. Train and log models: `python -m src.models.train`
+6. Run tests: `pytest`
+7. Start the API: `uvicorn src.api.main:app --reload`
+8. Launch MLflow UI: `mlflow ui --backend-store-uri sqlite:///mlruns/mlflow.db`
 
-### Fresh clone note
+### API endpoints
 
-The repository includes trained model artifacts in the models/ folder, so the API can run immediately after installing dependencies without retraining.
+- `GET /health` returns service health.
+- `POST /predict` returns the predicted heart disease class and confidence.
+- `GET /metrics` exposes Prometheus metrics.
 
 ## Current implementation highlights
 
-- A reusable data loader and preprocessing module
-- Baseline training for Logistic Regression and Random Forest
-- MLflow experiment tracking for each trained model
+- UCI Cleveland dataset download and normalization to a binary target
+- Reusable sklearn preprocessing with imputation, scaling, and one-hot encoding
+- GridSearchCV tuning for Logistic Regression and Random Forest
+- Cross-validation and held-out evaluation metrics
+- MLflow experiment tracking for metrics, params, plots, and model artifacts
 - A FastAPI prediction endpoint with a health check
-- Docker and Kubernetes starter files
-- Automated tests via pytest and GitHub Actions CI
+- Prometheus-compatible API metrics and request logging
+- Docker, Docker Compose, and Kubernetes deployment files
+- Automated linting, tests, training validation, and Docker build in GitHub Actions CI
 
 ## Assignment submission notes
 
 - The repository is published at https://github.com/2024CS05012/MLOps-Heart-Disease
-- The project is designed to be reproducible and easy to run locally
-- The final report outline and setup guidance are available in the docs/ folder
+- Report material, architecture notes, and setup guidance are available in the docs/ folder

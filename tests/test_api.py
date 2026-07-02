@@ -34,6 +34,14 @@ def test_predict_endpoint_returns_prediction():
     assert "confidence" in response.json()
 
 
+def test_metrics_endpoint_is_exposed():
+    client = TestClient(create_app())
+    response = client.get("/metrics")
+
+    assert response.status_code == 200
+    assert "http_requests" in response.text
+
+
 def test_predict_request_accepts_thal_field():
     payload = PredictRequest(
         age=63,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Iterable
 
 import mlflow
 import mlflow.sklearn
@@ -18,15 +18,21 @@ def configure_mlflow(tracking_uri: str | None = None) -> None:
     mlflow.set_experiment("heart-disease-mlops")
 
 
-def log_model_run(metrics: Dict[str, Any], model_name: str, model: Any) -> None:
+def log_model_run(
+    metrics: Dict[str, Any],
+    model_name: str,
+    model: Any,
+    artifact_paths: Iterable[Path] | None = None,
+) -> None:
     configure_mlflow()
     with mlflow.start_run(run_name=model_name):
         mlflow.log_param("model_name", model_name)
-        mlflow.log_metric("accuracy", metrics.get("accuracy", 0.0))
-        mlflow.log_metric("precision", metrics.get("precision", 0.0))
-        mlflow.log_metric("recall", metrics.get("recall", 0.0))
-        mlflow.log_metric("f1", metrics.get("f1", 0.0))
-        mlflow.log_metric("roc_auc", metrics.get("roc_auc", 0.0))
+        for key, value in metrics.get("best_params", {}).items():
+            mlflow.log_param(key, value)
+
+        for key, value in metrics.items():
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                mlflow.log_metric(key, float(value))
 
         artifact_path = Path("models") / f"{model_name}.joblib"
         if artifact_path.exists():
@@ -34,3 +40,9 @@ def log_model_run(metrics: Dict[str, Any], model_name: str, model: Any) -> None:
                 mlflow.log_artifact(str(artifact_path))
             except Exception:
                 pass
+
+        for path in artifact_paths or []:
+            if path.exists():
+                mlflow.log_artifact(str(path), artifact_path="evaluation")
+
+        mlflow.sklearn.log_model(model, artifact_path="model")
