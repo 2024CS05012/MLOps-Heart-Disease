@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import logging
 import os
 from pathlib import Path
 from typing import Any, Dict, Iterable
 
 import mlflow
 import mlflow.sklearn
+from mlflow.exceptions import MlflowException
+
+
+logger = logging.getLogger(__name__)
 
 
 def configure_mlflow(tracking_uri: str | None = None) -> None:
@@ -45,4 +50,11 @@ def log_model_run(
             if path.exists():
                 mlflow.log_artifact(str(path), artifact_path="evaluation")
 
-        mlflow.sklearn.log_model(model, artifact_path="model")
+        try:
+            mlflow.sklearn.log_model(
+                model,
+                artifact_path="model",
+                serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_PICKLE,
+            )
+        except (MlflowException, TypeError) as exc:
+            logger.warning("Skipping MLflow sklearn model logging for %s: %s", model_name, exc)
