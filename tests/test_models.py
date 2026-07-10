@@ -1,3 +1,4 @@
+from src.models.persistence import load_model_artifact
 from src.models.train import train_baseline_models
 
 
@@ -14,3 +15,9 @@ def test_train_baseline_models_returns_metrics():
     assert metrics["random_forest"]["cv_roc_auc_mean"] >= 0
     assert metrics["logistic_regression"]["best_params"] is not None
     assert metrics["random_forest"]["best_params"] is not None
+
+
+def test_load_model_artifact_falls_back_to_training_when_pickle_is_unusable():
+    model = load_model_artifact("logistic_regression")
+
+    assert model is not None
