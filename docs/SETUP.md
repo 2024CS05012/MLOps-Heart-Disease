@@ -7,7 +7,7 @@ Run commands from the repository root unless a step says otherwise.
 
 ## 1. Prerequisites
 Make sure the following are installed:
-- Python 3.9 or newer. Python 3.11 is recommended.
+- Python 3.9 Python 3.11 is recommended and is used by CI and Docker.
 - Git
 - Docker Desktop with Kubernetes enabled
 - `kubectl`
@@ -31,7 +31,7 @@ cd <your-repository-folder>
 
 Create and activate a virtual environment:
 ```bash
-python3 -m venv .venv
+python3.11 -m venv .venv
 source .venv/bin/activate
 ```
 

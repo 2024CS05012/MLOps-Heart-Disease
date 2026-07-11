@@ -17,8 +17,11 @@ This repository implements an end-to-end MLOps workflow for the UCI Heart Diseas
 
 ## Quick start
 
+Use Python 3.11 for the local environment. The project supports Python 3.9
+through 3.13; Python 3.14 is currently avoided.
+
 1. Create and activate a Python virtual environment:
-   - `python3 -m venv .venv`
+   - `python3.11 -m venv .venv`
    - `source .venv/bin/activate`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Download the dataset: `python data/raw/download_dataset.py`
