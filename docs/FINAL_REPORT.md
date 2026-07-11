@@ -370,4 +370,4 @@ flowchart LR
 - Kubernetes deployment manifest included and tested locally.
 - Monitoring through API logs and Prometheus metrics included.
 - Screenshots added under `screenshots/`.
-- Final Markdown report exported to PDF if required by the course portal.
+- Final Markdown report exported to PDF.
