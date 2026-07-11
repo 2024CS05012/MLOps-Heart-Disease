@@ -53,8 +53,9 @@ def log_model_run(
         try:
             mlflow.sklearn.log_model(
                 model,
-                artifact_path="model",
-                serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_PICKLE,
+                name="model",
+                serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_SKOPS,
+                skops_trusted_types=["numpy.dtype"],
             )
         except (MlflowException, TypeError) as exc:
             logger.warning("Skipping MLflow sklearn model logging for %s: %s", model_name, exc)
