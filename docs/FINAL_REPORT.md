@@ -1,6 +1,53 @@
-# Heart Disease Risk Prediction MLOps Pipeline
+# Student Details
 
-## 1. Project Overview
+- **Name:** Shyam Gupta
+- **ID:** 2024CS05012
+- **Course:** MLOps (S2-25_AMLCSZG523)
+- **Assignment 01:** End-to-End ML Model Development, CI/CD, and Production Deployment Experimental Learning
+- **Total Marks:** 50
+
+---
+
+## Submission Details
+
+| Artifact | Location |
+| --- | --- |
+| **Public GitHub repository** | <https://github.com/2024CS05012/MLOps-Heart-Disease> |
+| **Demo video (Google Drive)** | <https://drive.google.com/file/d/1jNtpcas45VublVSxIq0Rsypwvtw1Fdxu/view?usp=sharing> |
+| **CI/CD workflow** | <https://github.com/2024CS05012/MLOps-Heart-Disease/actions> |
+
+---
+
+# 1. Problem Statement & Dataset
+
+**Problem:** Design, develop, and deploy a scalable, reproducible machine learning
+solution using modern MLOps best practices. The assignment emphasizes practical
+automation, experiment tracking, CI/CD pipelines, containerization, cloud deployment,
+and monitoring, mirroring real-world production scenarios.
+
+**Dataset:**  Title: Heart Disease UCI Dataset
+- Source: [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/45/heart+disease)
+- CSV containing 14+ features (age, sex, blood pressure, cholesterol, etc.) and a
+binary target (presence/absence of heart disease).
+
+| Feature | Type | Description |
+| --- | --- | --- |
+| age | numeric | Patient age (years) |
+| sex | categorical (0/1) | 1 = male, 0 = female |
+| cp | categorical (0–3) | Chest pain type |
+| trestbps | numeric | Resting blood pressure (mm Hg) |
+| chol | numeric | Serum cholesterol (mg/dl) |
+| fbs | categorical | Fasting blood sugar > 120 mg/dl |
+| restecg | categorical | Resting ECG result |
+| thalach | numeric | Max heart rate achieved |
+| exang | categorical | Exercise-induced angina |
+| oldpeak | numeric | ST depression |
+| slope | categorical | Slope of peak ST segment |
+| ca | numeric | Number of major vessels colored by fluoroscopy |
+| thal | categorical | Thalassemia indicator |
+| target | binary | 1 = heart disease, 0 = none |
+
+## 2. Project Overview
 
 This project implements an end-to-end MLOps workflow for predicting the risk of
 heart disease from patient clinical data. The solution uses the UCI Cleveland
@@ -12,9 +59,7 @@ The final application exposes a FastAPI prediction API that accepts patient
 features as JSON and returns a binary heart disease prediction with a confidence
 score.
 
-Repository: https://github.com/2024CS05012/MLOps-Heart-Disease
-
-## 2. Setup and Installation
+## 3. Setup and Installation
 
 The complete setup and execution instructions are provided in:
 
@@ -32,7 +77,7 @@ pip install -r requirements.txt
 The project can be verified locally using Python, Docker Desktop, Docker
 Compose, and Docker Desktop Kubernetes.
 
-## 3. Dataset
+## 4. Dataset
 
 Dataset: Heart Disease UCI Dataset, Cleveland processed dataset.
 
@@ -51,7 +96,7 @@ cholesterol, fasting blood sugar, resting ECG, maximum heart rate,
 exercise-induced angina, ST depression, slope, number of major vessels, and
 thalassemia category.
 
-## 4. Exploratory Data Analysis
+## 5. Exploratory Data Analysis
 
 EDA artifacts are generated with:
 
@@ -83,7 +128,7 @@ Captured screenshots:
 - ![Correlation heatmap](../screenshots/eda/correlation_heatmap.png)
 - ![Thalach by target](../screenshots/eda/thalach_by_target.png)
 
-## 5. Preprocessing and Feature Engineering
+## 6. Preprocessing and Feature Engineering
 
 The project uses a reusable sklearn preprocessing pipeline defined in
 `src/features/engineering.py`.
@@ -100,7 +145,7 @@ Preprocessing choices:
 This satisfies reproducibility because the saved model artifact includes both
 feature transformations and the trained classifier.
 
-## 6. Model Development
+## 7. Model Development
 
 Two classification models are trained:
 
@@ -154,7 +199,7 @@ Captured screenshots:
 - ![Random forest confusion matrix](../screenshots/random_forest/confusion_matrix.png)
 - ![Random forest ROC curve](../screenshots/random_forest/roc_curve.png)
 
-## 7. Experiment Tracking
+## 8. Experiment Tracking
 
 MLflow is used for experiment tracking. The MLflow integration is implemented
 in `src/models/mlflow_utils.py`.
@@ -186,7 +231,7 @@ Captured screenshots:
 - ![MLflow runs](../screenshots/mlflow_runs.png)
 - ![MLflow run details](../screenshots/mlflow_run_details.png)
 
-## 8. Model Packaging and Reproducibility
+## 9. Model Packaging and Reproducibility
 
 The final models are saved in reusable joblib format:
 
@@ -205,7 +250,7 @@ Reproducibility files:
 - `models/*.joblib`
 - `docs/SETUP.md`
 
-## 9. API Serving
+## 10. API Serving
 
 The model is served using FastAPI in `src/api/main.py`.
 
@@ -232,7 +277,7 @@ Captured screenshot:
 
 - ![API prediction response](../screenshots/api_predict.png)
 
-## 10. Containerization
+## 11. Containerization
 
 The API is containerized using Docker.
 
@@ -254,7 +299,7 @@ Captured screenshots:
 - ![Docker build and running container](../screenshots/docker_build_run.png)
 - ![Docker API health check](../screenshots/docker_api_health.png)
 
-## 11. CI/CD Pipeline
+## 12. CI/CD Pipeline
 
 GitHub Actions is configured in `.github/workflows/ci.yml`.
 
@@ -275,7 +320,7 @@ Captured screenshot:
 
 - ![GitHub Actions workflow success](../screenshots/github_actions_success.png)
 
-## 12. Kubernetes Deployment
+## 13. Kubernetes Deployment
 
 Kubernetes deployment is defined in `k8s/deployment.yaml`.
 
@@ -308,7 +353,7 @@ Captured screenshots:
 - ![Kubernetes pods and service](../screenshots/kubernetes_pods_service.png)
 - ![Kubernetes API health check](../screenshots/kubernetes_api_health.png)
 
-## 13. Monitoring and Logging
+## 14. Monitoring and Logging
 
 Monitoring and logging are implemented with FastAPI request logging and
 Prometheus-compatible metrics.
@@ -338,7 +383,7 @@ Captured screenshots:
 - ![Prometheus targets](../screenshots/prometheus_targets.png)
 - ![API logs](../screenshots/api_logs.png)
 
-## 14. Architecture
+## 15. Architecture
 
 ```mermaid
 flowchart LR
@@ -357,7 +402,7 @@ flowchart LR
     N[GitHub Actions] --> O[Lint + Test + Train + Docker Build]
 ```
 
-## 15. Final Submission Checklist
+## 16. Final Submission Checklist
 
 - Code repository link included.
 - Setup instructions included in `docs/SETUP.md`.
