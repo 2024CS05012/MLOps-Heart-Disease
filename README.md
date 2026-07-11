@@ -1,6 +1,21 @@
 # Heart Disease MLOps Assignment
 
-This repository implements an end-to-end MLOps workflow for the UCI Heart Disease dataset. It covers data acquisition, EDA, preprocessing, model training and tuning, experiment tracking with MLflow, API serving with FastAPI, containerization, CI/CD, Kubernetes deployment manifests, and Prometheus-ready monitoring.
+This repository implements an end-to-end MLOps workflow for predicting heart disease risk using the UCI Cleveland Heart Disease dataset. The project covers the full machine learning lifecycle, including data acquisition, exploratory data analysis, preprocessing, model training and evaluation, MLflow experiment tracking, FastAPI-based deployment, Docker and Kubernetes packaging, CI/CD automation, and monitoring.
+
+## Project summary
+
+- Build a binary classification model to predict whether a patient is likely to have heart disease.
+- Compare and evaluate multiple models such as Logistic Regression and Random Forest.
+- Package the trained pipeline for reproducible inference through a REST API.
+- Deploy the service locally using Docker and Kubernetes, with Prometheus-compatible monitoring.
+- Automate validation and build checks with GitHub Actions.
+
+## Documentation links
+
+- Setup guide: [docs/SETUP.md](docs/SETUP.md)
+- Final report: [docs/FINAL_REPORT.md](docs/FINAL_REPORT.md)
+- Architecture notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- CI workflow: [.github/workflows/ci.yml](.github/workflows/ci.yml)
 
 ## Project structure
 
