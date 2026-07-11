@@ -13,7 +13,7 @@ This repository implements an end-to-end MLOps workflow for the UCI Heart Diseas
 - tests/ for unit tests
 - docker/ and k8s/ for deployment assets
 - .github/workflows/ for CI
-- docs/ for the report outline and setup notes
+- docs/ for the final report, architecture notes, and setup guidance
 
 ## Quick start
 
