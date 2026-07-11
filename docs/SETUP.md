@@ -199,10 +199,6 @@ Open the interfaces:
 - API docs: http://127.0.0.1:8000/docs
 - Prometheus: http://127.0.0.1:9090
 
-Stop the monitoring stack when finished:
-```bash
-docker compose -f docker/docker-compose.yml down
-```
 
 ## 11. Quick Verification Checklist
 If you want to verify everything quickly from a clean checkout, run:
