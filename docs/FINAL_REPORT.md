@@ -230,6 +230,8 @@ Captured screenshots:
 
 - ![MLflow runs](../screenshots/mlflow_runs.png)
 - ![MLflow run details](../screenshots/mlflow_run_details.png)
+- ![MLflow run details](../screenshots/mlflow_run_details1.png)
+- ![MLflow run details](../screenshots/mlflow_run_details2.png)
 
 ## 9. Model Packaging and Reproducibility
 
