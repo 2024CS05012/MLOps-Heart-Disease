@@ -37,7 +37,6 @@ source .venv/bin/activate
 
 Install dependencies:
 ```bash
-pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
