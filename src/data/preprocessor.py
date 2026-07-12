@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Utilities for preparing train and test splits for model training."""
+
+from __future__ import annotations
 
 from typing import Tuple
 

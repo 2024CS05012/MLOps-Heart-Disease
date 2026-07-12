@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Utilities for tracking training runs with MLflow."""
+
+from __future__ import annotations
 
 import logging
 import os
