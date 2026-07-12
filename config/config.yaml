@@ -1,3 +1,0 @@
-project_name: heart-disease-mlops
-model_name: logistic_regression
-tracking_uri: file:./mlruns
