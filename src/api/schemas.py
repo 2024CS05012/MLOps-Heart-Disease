@@ -1,3 +1,5 @@
+"""Pydantic schemas used by the API endpoints."""
+
 from pydantic import BaseModel
 
 

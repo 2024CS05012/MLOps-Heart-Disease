@@ -1,3 +1,5 @@
+"""Tests for the FastAPI prediction service."""
+
 from fastapi.testclient import TestClient
 
 from src.api.main import PredictRequest, create_app

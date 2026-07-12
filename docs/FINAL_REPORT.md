@@ -70,7 +70,6 @@ Main setup commands:
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -181,7 +180,7 @@ Current generated classification report summary:
 | Model | Accuracy | Weighted Precision | Weighted Recall | Weighted F1 |
 |---|---:|---:|---:|---:|
 | Logistic Regression | 0.8852 | 0.8899 | 0.8852 | 0.8854 |
-| Random Forest | 0.8852 | 0.8899 | 0.8852 | 0.8854 |
+| Random Forest | 0.8689 | 0.8711 | 0.8689 | 0.8691 |
 
 Evaluation artifacts:
 

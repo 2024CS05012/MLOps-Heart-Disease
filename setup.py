@@ -1,4 +1,6 @@
-from setuptools import setup, find_packages
+"""Package metadata for installing the heart disease MLOps project."""
+
+from setuptools import find_packages, setup
 
 setup(
     name="heart-disease-mlops",

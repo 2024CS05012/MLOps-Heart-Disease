@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Generate exploratory data analysis plots for the heart disease project."""
+
 # ruff: noqa: E402
 
 import os
@@ -21,6 +23,7 @@ EDA_DIR = Path("artifacts/eda")
 
 def generate_eda_artifacts(output_dir: Path = EDA_DIR) -> list[Path]:
     """Generate assignment-ready EDA figures for the report."""
+    # Create the output directory if it does not already exist.
     output_dir.mkdir(parents=True, exist_ok=True)
     df = load_heart_disease_data()
     generated_files: list[Path] = []

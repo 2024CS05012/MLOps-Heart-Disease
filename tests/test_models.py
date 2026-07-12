@@ -1,3 +1,5 @@
+"""Tests for model training and artifact loading behavior."""
+
 from src.models.persistence import load_model_artifact
 from src.models.train import train_baseline_models
 

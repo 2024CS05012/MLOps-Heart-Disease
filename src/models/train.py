@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Train baseline classification models and save evaluation artifacts."""
+
 # ruff: noqa: E402
 
 import json
@@ -37,18 +39,21 @@ ARTIFACT_DIR = Path("artifacts")
 
 
 def _build_cv(y_train: Any) -> StratifiedKFold:
+    # Use the largest feasible cross-validation split count while keeping folds valid.
     min_class_count = int(y_train.value_counts().min())
     n_splits = max(2, min(5, min_class_count))
     return StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=42)
 
 
 def _positive_class_scores(model: Any, X_test: Any) -> Any:
+    # Return probability scores for the positive class when available; otherwise use the decision function.
     if hasattr(model, "predict_proba"):
         return model.predict_proba(X_test)[:, 1]
     return model.decision_function(X_test)
 
 
 def _save_evaluation_artifacts(model_name: str, model: Any, X_test: Any, y_test: Any, predictions: Any, probabilities: Any) -> list[Path]:
+    # Persist evaluation outputs such as metrics, confusion matrices, and ROC curves.
     output_dir = ARTIFACT_DIR / model_name
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -74,6 +79,7 @@ def _save_evaluation_artifacts(model_name: str, model: Any, X_test: Any, y_test:
 
 
 def train_baseline_models() -> Dict[str, Dict[str, Any]]:
+    # Prepare the data and build the cross-validation strategy.
     X_train, X_test, y_train, y_test = prepare_training_data()
     cv = _build_cv(y_train)
 
@@ -88,9 +94,9 @@ def train_baseline_models() -> Dict[str, Dict[str, Any]]:
         "random_forest": {
             "estimator": RandomForestClassifier(random_state=42),
             "param_grid": {
-                "classifier__n_estimators": [50, 100, 150],
-                "classifier__max_depth": [None, 4, 8],
-                "classifier__min_samples_split": [2, 5],
+                "classifier__n_estimators": [100, 200, 300],
+                "classifier__max_depth": [None, 6, 10],
+                "classifier__min_samples_split": [2, 10],
             },
         },
     }
@@ -124,6 +130,7 @@ def train_baseline_models() -> Dict[str, Dict[str, Any]]:
 
     metrics = {}
     artifact_paths: dict[str, list[Path]] = {}
+    # Train each configured model and collect evaluation metrics.
     for name, spec in model_specs.items():
         pipeline = Pipeline(
             steps=[

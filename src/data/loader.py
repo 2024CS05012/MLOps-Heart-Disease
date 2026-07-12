@@ -1,3 +1,5 @@
+"""Helpers for loading and normalizing the heart disease dataset."""
+
 from pathlib import Path
 from typing import Optional
 
@@ -26,15 +28,18 @@ def normalize_heart_disease_data(df: pd.DataFrame) -> pd.DataFrame:
     """Return the heart disease data with stable column names and binary target."""
     df = df.copy()
 
+    # Handle the common column layout used by the Cleveland dataset.
     if list(df.columns) == list(range(len(HEART_DISEASE_COLUMNS))):
         df.columns = HEART_DISEASE_COLUMNS
     elif "num" in df.columns and "target" not in df.columns:
         df = df.rename(columns={"num": "target"})
 
+    # Ensure every required feature and the target column are present.
     missing_columns = [column for column in HEART_DISEASE_COLUMNS if column not in df.columns]
     if missing_columns:
         raise ValueError(f"Dataset is missing required columns: {missing_columns}")
 
+    # Replace missing placeholders with pandas missing values and coerce to numeric types.
     df = df[HEART_DISEASE_COLUMNS].replace("?", pd.NA)
     for column in HEART_DISEASE_COLUMNS:
         df[column] = pd.to_numeric(df[column], errors="coerce")
@@ -45,6 +50,7 @@ def normalize_heart_disease_data(df: pd.DataFrame) -> pd.DataFrame:
 
 def load_heart_disease_data(csv_path: Optional[str] = None) -> pd.DataFrame:
     """Load the heart disease dataset from CSV, falling back to a smoke-test sample."""
+    # Try the project data path first, then the common alternate filenames.
     if csv_path is None:
         candidate_paths = [
             Path("data/raw/heart.csv"),

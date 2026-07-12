@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Utilities for tracking training runs with MLflow."""
+
 import logging
 import os
 from pathlib import Path
@@ -14,6 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 def configure_mlflow(tracking_uri: str | None = None) -> None:
+    # Set a local MLflow tracking backend and experiment name for training runs.
     if tracking_uri is None:
         tracking_uri = os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlruns/mlflow.db"
 
@@ -30,6 +33,7 @@ def log_model_run(
     artifact_paths: Iterable[Path] | None = None,
 ) -> None:
     configure_mlflow()
+    # Log hyperparameters, metrics, and evaluation artifacts for the trained model.
     with mlflow.start_run(run_name=model_name):
         mlflow.log_param("model_name", model_name)
         for key, value in metrics.get("best_params", {}).items():

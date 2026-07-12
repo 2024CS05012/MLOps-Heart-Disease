@@ -1,3 +1,5 @@
+"""FastAPI application for serving heart disease predictions."""
+
 import logging
 import time
 
@@ -15,6 +17,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 
 class PredictRequest(BaseModel):
+    """Schema for incoming prediction requests."""
     age: int
     sex: int
     cp: int
@@ -31,11 +34,13 @@ class PredictRequest(BaseModel):
 
 
 class PredictResponse(BaseModel):
+    """Schema for prediction responses returned by the API."""
     prediction: int
     confidence: float
 
 
 def create_app() -> FastAPI:
+    # Build the FastAPI app and expose Prometheus metrics for monitoring.
     app = FastAPI(title="Heart Disease MLOps API")
     Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
@@ -54,10 +59,12 @@ def create_app() -> FastAPI:
         return response
 
     @app.get("/health")
+    # Simple readiness endpoint for deployment and smoke testing.
     def health() -> dict:
         return {"status": "ok"}
 
     @app.post("/predict", response_model=PredictResponse)
+    # Load the model, build a feature row, and return the prediction plus confidence.
     def predict(payload: PredictRequest) -> PredictResponse:
         model = load_model_artifact("logistic_regression")
         row = build_feature_row(payload)

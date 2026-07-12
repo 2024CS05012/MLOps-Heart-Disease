@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Persist and load trained model artifacts from disk."""
+
 import logging
 import joblib
 from pathlib import Path
@@ -12,6 +14,7 @@ logger = logging.getLogger("heart_disease_api")
 
 
 def save_model_artifacts(models: Dict[str, Any]) -> None:
+    # Save each trained model to the models directory for later inference.
     for name, payload in models.items():
         model = payload.get("model")
         if model is None:
@@ -21,6 +24,7 @@ def save_model_artifacts(models: Dict[str, Any]) -> None:
 
 
 def _train_and_get_model(name: str) -> Any:
+    # Re-train the requested model if the artifact is missing or cannot be loaded.
     from src.models.train import train_baseline_models
 
     metrics = train_baseline_models()
@@ -30,6 +34,7 @@ def _train_and_get_model(name: str) -> Any:
 
 
 def load_model_artifact(name: str) -> Any:
+    # Load a model from disk when available; otherwise fall back to training it.
     model_path = MODEL_DIR / f"{name}.joblib"
     if model_path.exists():
         try:
