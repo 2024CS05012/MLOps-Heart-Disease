@@ -13,7 +13,7 @@
 | Artifact | Location |
 | --- | --- |
 | **Public GitHub repository** | <https://github.com/2024CS05012/MLOps-Heart-Disease> |
-| **Demo video (Google Drive)** | <> |
+| **Demo video (Google Drive)** | <https://www.youtube.com/watch?v=NZfiez_nrdI> |
 | **CI/CD workflow** | <https://github.com/2024CS05012/MLOps-Heart-Disease/actions> |
 
 ---

@@ -1,7 +1,7 @@
 # Setup Guide
 
 This guide is written so a fresh user can run the full assignment project on a
-local machine and verify all 8 tasks.
+local machine and verify all tasks.
 
 Run commands from the repository root unless a step says otherwise.
 
@@ -136,7 +136,7 @@ curl -X POST http://127.0.0.1:8000/predict \
 ```
 
 When you are done testing this standalone container, stop it before starting the
-Docker Compose monitoring stack in Task 8:
+Docker Compose monitoring stack in Task 10:
 ```bash
 docker stop heart-disease-api
 ```
@@ -145,7 +145,7 @@ If Docker says the container does not exist or is not running, continue with the
 next task.
 
 ## 9. Production Deployment With Kubernetes
-Build the local image first if you have not already done Task 6. Docker Desktop
+Build the local image first if you have not already done Task 8. Docker Desktop
 Kubernetes can use this local image directly:
 ```bash
 docker build -f docker/Dockerfile -t heart-disease-api:local .
@@ -182,7 +182,7 @@ curl -X POST http://127.0.0.1:18000/predict \
 ```
 
 ## 10. Monitoring & Logging
-If the standalone container from Task 6 is still running, stop it first:
+If the standalone container from Task 8 is still running, stop it first:
 ```bash
 docker stop heart-disease-api
 ```
