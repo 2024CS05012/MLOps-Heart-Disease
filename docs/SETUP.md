@@ -162,13 +162,23 @@ For local port-forwarding, keep this command running in its own terminal:
 ```bash
 kubectl port-forward svc/heart-disease-api-service 18000:8000
 ```
+Then test from another terminal health:
+```bash
+curl http://127.0.0.1:18000/health
+```
 
-Then test from another terminal:
+Then test from another terminal for prediction no heart disease:
 ```bash
 curl http://127.0.0.1:18000/health
 curl -X POST http://127.0.0.1:18000/predict \
   -H "Content-Type: application/json" \
   -d '{"age":63,"sex":1,"cp":3,"trestbps":145,"chol":233,"fbs":1,"restecg":0,"thalach":150,"exang":0,"oldpeak":2.3,"slope":0,"ca":0,"thal":1}'
+```
+Then test from another terminal for prediction heart disease:
+```bash
+curl -X POST http://127.0.0.1:18000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"age":67,"sex":1,"cp":4,"trestbps":160,"chol":286,"fbs":0,"restecg":2,"thalach":108,"exang":1,"oldpeak":1.5,"slope":2,"ca":3,"thal":3}'
 ```
 
 ## 10. Task 8: Monitoring & Logging
@@ -186,7 +196,7 @@ docker compose -f docker/docker-compose.yml up -d --build
 
 Verify the metrics endpoint:
 ```bash
-curl http://127.0.0.1:8000/metrics
+curl http://127.0.0.1:18080/metrics
 ```
 
 Verify Prometheus target health:
@@ -195,7 +205,7 @@ curl http://127.0.0.1:9090/api/v1/targets
 ```
 
 Open the interfaces:
-- API docs: http://127.0.0.1:8000/docs
+- API docs: http://127.0.0.1:18080/docs
 - Prometheus: http://127.0.0.1:9090
 
 

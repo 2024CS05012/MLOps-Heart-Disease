@@ -375,7 +375,7 @@ docker compose -f docker/docker-compose.yml up -d --build
 Verify metrics:
 
 ```bash
-curl http://127.0.0.1:8000/metrics
+curl http://127.0.0.1:18080/metrics
 curl http://127.0.0.1:9090/api/v1/targets
 ```
 
